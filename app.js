@@ -1,6 +1,6 @@
 // --- Authentication Logic ---
 const ALLOWED_EMAILS = [
-    "YOUR_EMAIL@gmail.com" // TODO: Replace with your actual email
+    "leandro.lok@gmail.com" // TODO: Replace with your actual email
 ];
 
 const loginOverlay = document.getElementById('login-overlay');
