@@ -22,11 +22,19 @@ const motoIcon = L.icon({
     shadowSize: [25, 25]
 });
 
+// Configure MarkerClusterGroup
+const markers = L.markerClusterGroup({
+    disableClusteringAtZoom: 17,
+    spiderfyOnMaxZoom: false,
+    showCoverageOnHover: false,
+    maxClusterRadius: 50
+});
+
 // Load parking data
 fetch('data/parking_spots.json')
     .then(response => response.json())
     .then(data => {
-        L.geoJSON(data, {
+        const geoJsonLayer = L.geoJSON(data, {
             pointToLayer: function (feature, latlng) {
                 return L.marker(latlng, { icon: motoIcon });
             },
@@ -49,7 +57,10 @@ fetch('data/parking_spots.json')
                     layer.bindPopup(content);
                 }
             }
-        }).addTo(map);
+        });
+
+        markers.addLayer(geoJsonLayer);
+        map.addLayer(markers);
     })
     .catch(error => console.error('Error loading data:', error));
 
