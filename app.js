@@ -1,4 +1,4 @@
-// --- Authentication Logic Removed ---
+// --- Authentication Removed ---
 
 
 // --- Map Logic ---
