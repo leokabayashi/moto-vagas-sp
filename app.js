@@ -1,65 +1,12 @@
-// --- Authentication Logic ---
-const ALLOWED_EMAILS = [
-    "leandro.lok@gmail.com" // TODO: Replace with your actual email
-];
+// --- Authentication Logic Removed ---
 
-const loginOverlay = document.getElementById('login-overlay');
-const appContainer = document.getElementById('app-container');
-const loginBtn = document.getElementById('login-btn');
-const logoutBtn = document.getElementById('logout-btn');
-const authStatus = document.getElementById('auth-status');
-
-// Login
-loginBtn.addEventListener('click', () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-        .catch(error => {
-            console.error("Login failed:", error);
-            authStatus.textContent = "Erro no login: " + error.message;
-        });
-});
-
-// Logout
-logoutBtn.addEventListener('click', () => {
-    firebase.auth().signOut();
-});
-
-// Auth State Listener
-firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-        console.log("User logged in:", user.email);
-        if (ALLOWED_EMAILS.includes(user.email)) {
-            // Allowed
-            loginOverlay.classList.add('hidden');
-            appContainer.classList.remove('hidden');
-            authStatus.textContent = "";
-
-            // Trigger map resize to ensure it renders correctly after being unhidden
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 100);
-        } else {
-            // Not allowed
-            loginOverlay.classList.remove('hidden');
-            appContainer.classList.add('hidden');
-            authStatus.textContent = `Acesso negado para ${user.email}.`;
-            // Optional: Auto sign out if not allowed
-            // firebase.auth().signOut();
-        }
-    } else {
-        // Not logged in
-        loginOverlay.classList.remove('hidden');
-        appContainer.classList.add('hidden');
-        authStatus.textContent = "";
-    }
-});
 
 // --- Map Logic ---
 // Initialize map centered on São Paulo
 const map = L.map('map').setView([-23.5505, -46.6333], 13);
 
-// Add dark mode tile layer
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+// Add light mode tile layer (Voyager)
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
@@ -112,14 +59,23 @@ document.getElementById('locate-btn').addEventListener('click', () => {
 });
 
 map.on('locationfound', (e) => {
+    const redIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
     L.circle(e.latlng, {
-        color: '#3b82f6',
-        fillColor: '#3b82f6',
+        color: '#ef4444',
+        fillColor: '#ef4444',
         fillOpacity: 0.2,
         radius: e.accuracy / 2
     }).addTo(map);
 
-    L.marker(e.latlng).addTo(map)
+    L.marker(e.latlng, { icon: redIcon }).addTo(map)
         .bindPopup("Você está aqui").openPopup();
 });
 
