@@ -42,11 +42,13 @@ fetch('data/parking_spots.json')
                 if (feature.properties) {
                     const p = feature.properties;
                     const content = `
-                        <div style="min-width: 200px;">
-                            <h3 style="margin-bottom: 0.5rem; color: #3b82f6;">${p.Local || 'Local sem nome'}</h3>
-                            <p style="margin-bottom: 0.25rem;"><strong>Vagas:</strong> ${p.Quantidade || 'N/A'}</p>
-                            <p style="margin-bottom: 0.25rem;">${p.Complement || ''}</p>
-                            <p style="font-size: 0.8rem; color: #94a3b8;">ID: ${p.NumeroVaga}</p>
+                        <div class="popup-grid">
+                            <div class="popup-info">
+                                <h3 style="margin-bottom: 0.5rem; color: #3b82f6;">${p.Local || 'Local sem nome'}</h3>
+                                <p style="margin-bottom: 0.25rem;"><strong>Vagas:</strong> ${p.Quantidade || 'N/A'}</p>
+                                <p style="margin-bottom: 0.25rem;">${p.Complement || ''}</p>
+                                <p style="font-size: 0.8rem; color: #94a3b8;">ID: ${p.NumeroVaga}</p>
+                            </div>
                             <div class="popup-actions">
                                 <a href="https://www.google.com/maps/dir/?api=1&destination=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
                                    target="_blank" 
