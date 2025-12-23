@@ -47,20 +47,19 @@ fetch('data/parking_spots.json')
                                 <h3 style="margin-bottom: 0.5rem; color: #3b82f6;">${p.Local || 'Local sem nome'}</h3>
                                 <p style="margin-bottom: 0.25rem;"><strong>Vagas:</strong> ${p.Quantidade || 'N/A'}</p>
                                 <p style="margin-bottom: 0.25rem;">${p.Complement || ''}</p>
-                                <p style="font-size: 0.8rem; color: var(--text-secondary);">ID: ${p.NumeroVaga}</p>
                             </div>
                             <div class="popup-actions">
                                 <a href="https://www.google.com/maps/dir/?api=1&destination=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
                                    target="_blank" 
-                                   class="popup-btn">
-                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
-                                   Direções
+                                   class="popup-btn"
+                                   title="Direções">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
                                 </a>
                                 <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
                                    target="_blank" 
-                                   class="popup-btn popup-btn-secondary">
-                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                   Street View
+                                   class="popup-btn popup-btn-secondary"
+                                   title="Street View">
+                                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                 </a>
                             </div>
                         </div>
