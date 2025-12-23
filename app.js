@@ -47,11 +47,18 @@ fetch('data/parking_spots.json')
                             <p style="margin-bottom: 0.25rem;"><strong>Vagas:</strong> ${p.Quantidade || 'N/A'}</p>
                             <p style="margin-bottom: 0.25rem;">${p.Complement || ''}</p>
                             <p style="font-size: 0.8rem; color: #94a3b8;">ID: ${p.NumeroVaga}</p>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
-                               target="_blank" 
-                               style="display: inline-block; margin-top: 0.5rem; color: #3b82f6; text-decoration: none; font-weight: 500;">
-                               Como chegar &rarr;
-                            </a>
+                            <div style="display: flex; gap: 12px; margin-top: 0.5rem;">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
+                                   target="_blank" 
+                                   style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                   Como chegar &rarr;
+                                </a>
+                                <a href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${layer.getLatLng().lat},${layer.getLatLng().lng}" 
+                                   target="_blank" 
+                                   style="color: #3b82f6; text-decoration: none; font-weight: 500;">
+                                   Street View &rarr;
+                                </a>
+                            </div>
                         </div>
                     `;
                     layer.bindPopup(content);
